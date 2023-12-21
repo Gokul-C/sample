@@ -16,8 +16,8 @@ spec:
         app: devsecops
     spec:
       containers:
-      - image: replace
-        name: devsecops-container
+      - image: nginx
+        name: argo-nginx-container
         securityContext:
           runAsNonRoot: true
           #numeric values should give as 100 or any
