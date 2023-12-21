@@ -25,6 +25,12 @@ pipeline {
                    
        }
     }
+    stage('K8s-Deploy') {
+       steps {
+         sh "kubectl create -f k8s-deploy.yaml -n training"
+                   
+       }
+    }
   }
       
 }
