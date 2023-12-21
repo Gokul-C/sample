@@ -36,7 +36,7 @@ pipeline {
     }
     stage('K8s-Deploy') {
        steps {
-         sh "sed -i 's#replace#training:${GIT_COMMIT}#g' k8s_deploy.yaml"
+         sh "sed -i 's#replace#training:${GIT_COMMIT}#g' k8s-deploy.yaml"
          sh "kubectl apply -f k8s-deploy.yaml"
                    
        }
