@@ -1,5 +1,13 @@
 pipeline { 
   agent any
+  environment {
+    deploymentName = "devsecops"
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
+    imageName = "gokulc2127/numeric-app:${GIT_COMMIT}"
+    applicationURL = "http://192.168.0.106"
+    applicationURI = "/increment/99"
+  }
   stages {
     stage('Build Artifact') {
        steps {
