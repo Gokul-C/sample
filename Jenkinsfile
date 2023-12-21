@@ -4,7 +4,7 @@ pipeline {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
     serviceName = "devsecops-svc"
-    imageName = "gokulc2127/numeric-app:${GIT_COMMIT}"
+    imageName = "training:${GIT_COMMIT}"
     applicationURL = "http://192.168.0.106"
     applicationURI = "/increment/99"
   }
@@ -29,13 +29,15 @@ pipeline {
     }
     stage('Build docker image') {
        steps {
-         sh "docker build -t training:v1 ."
-                   
+         sh 'printenv'
+         sh 'sudo docker build -t training:""$GIT_COMMIT"" .'
+                            
        }
     }
     stage('K8s-Deploy') {
        steps {
-         sh "kubectl create -f k8s-deploy.yaml -n training"
+         sh "sed -i 's#replace#training:${GIT_COMMIT}#g' k8s_deploy.yaml"
+         sh "kubectl apply -f k8s_deploy.yaml"
                    
        }
     }
